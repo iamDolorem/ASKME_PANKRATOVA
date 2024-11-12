@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskPupkin</title>
+    <link rel="stylesheet" href="./../static/css/ask.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <h3>
+                <a href="./index.html">
+                    AskPupkin
+                </a>
+            </h3>
+        </div>
+
+        <div class="search-form">
+            <form action="./question.html">
+                <input class ="search-form-input" type="text" placeholder="Search">
+                <button class ="search-form-button">Ask!</button>
+            </form>
+        </div>
+
+        <div class="account">
+            <div class="account-content">
+                <div class="account-actions">
+                    <a href="./login.html">Log in</a>
+                    <a href="./register.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="title-bar">
+            <h1>New Question</h1>
+        </div>
+
+        <div class="content">
+            <div class="all-question">
+                <form action="./question.html">
+                    <div class="question">
+                        <div class="question-left">
+                            <h3>Title</h3>
+                        </div>
+
+                        <div class="question-right">
+                                <input class ="question-right-input" type="text" placeholder="How to build a moon park?">
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-left">
+                            <h3>Text</h3>
+                        </div>
+
+                        <div class="question-right">
+                                <textarea class="comment" placeholder="Really, how? &#10Have no idea about it"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-left">
+                            <h3>Tags</h3>
+                        </div>
+
+                        <div class="question-right">
+                                <input class ="question-right-input" type="text" placeholder="moon, park, puzzle">
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <div class="question-left">
+                        </div>
+
+                        <div class="question-right">
+                            <div class="question-search-form">
+                                    <button class ="question-search-form-button">Ask!</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <aside class="sidebar">
+                <section class="popular-tags">
+                    <h3>Popular Tags</h3>
+                    <div class="tags">
+                        <a href="#">perl</a>
+                        <a href="#" style="color: #FF0000">python</a>
+                        <a href="#">TechnoPark</a>
+                        <a href="#" style="color: #FF0000">MySQL</a>
+                        <a href="#" style="color: #32CD32">django</a>
+                        <a href="#">Mail.Ru</a>
+                        <a href="#">Voloshin</a>
+                        <a href="#" style="color: #FFA500">Firefox</a>
+                    </div>
+                </section>
+
+                <section class="best-members">
+                    <h3>Best Members</h3>
+                    <ul class="best-members-list">
+                        <li><a href="#"> Mr. Freeman</a></li>
+                        <li><a href="#"> Dr. House</a></li>
+                        <li><a href="#"> Bender</a></li>
+                        <li><a href="#"> Queen Victoria</a></li>
+                        <li><a href="#"> V. Pupkin</a></li>
+                    </ul>
+                </section>
+            </aside>
+        </div>
+    </main>
+</body>
+</html>

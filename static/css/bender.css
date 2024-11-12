@@ -1,0 +1,238 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    background-color: #009A63;
+    padding: 10px;
+}
+
+.logo{
+    position: absolute;
+    left: 2%;
+}
+
+.logo a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #004524;
+}
+
+.logo a:visited {
+    color: #4B0082; /* Цвет посещенных ссылок */
+}
+
+.search-form{
+    position: absolute;
+    left: 35%;
+}
+
+.search-form-input {
+    border-radius: 5px;
+    height: 26px;
+    width: 300px;
+}
+
+.search-form-button {
+    all: unset;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #004524;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.search-form-button:hover {
+    opacity: 80%;
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    right: 2%;
+}
+
+.account a{
+    margin-right: 10px;
+}
+
+.account-image img {
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+
+.account-image a:hover img {
+    transform: scale(1.25);
+}
+
+.account-actions a {
+    text-decoration: none;
+    color: #004524;
+}
+
+.account-actions a:visited {
+    color: #4B0082; /* Цвет посещенных ссылок */
+}
+
+.container {
+    padding: 10px;
+    background-color: white;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 10px;
+}
+
+.content {
+    display: flex;
+    gap: 20px;
+}
+
+.cards {
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.card {
+    border: 1px solid black;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    background-color: #BDECB6;
+}
+
+.card-left {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 20%;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.card-likes {
+    width: 100%;
+    padding: 0;
+}
+
+.card-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-title a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #004524;
+}
+
+.card-title a:visited {
+    color: #4B0082; /* Цвет посещенных ссылок */
+}
+
+.card-right-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-right-bottom a {
+    text-decoration: none;
+    color: #004524;
+}
+
+.card-right-bottom a:visited {
+    color: #4B0082; /* Цвет посещенных ссылок */
+}
+
+.card-tags a {
+    text-decoration: none;
+    color: #004524;
+}
+
+.card-tags a:visited {
+    color: #4B0082; /* Цвет посещенных ссылок */
+}
+
+.pagination button {
+    border-radius: 5px;
+    background-color: #004524;
+    color: white;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    opacity: 80%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 30%;
+}
+
+.popular-tags h3 {
+    margin-bottom: 10px;
+}
+
+.tags a {
+    text-decoration: none;
+    margin-right: 10px;
+    color: #004524;
+}
+
+.tags a:visited {
+    color: #4B0082; /* Цвет посещенных ссылок */
+}
+
+.best-members-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.best-members-list li::before {
+    content: '•';
+}
+
+.best-members-list a {
+    text-decoration: none;
+    color: #004524;
+}
+
+.best-members-list a:visited {
+    color: #4B0082; /* Цвет посещенных ссылок */
+}
