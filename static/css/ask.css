@@ -11,7 +11,6 @@ h1, h2, h3, h4, h5, h6 {
 .header {
     display: flex;
     height: 60px;
-    justify-content: space-between;
     align-items: center;
     background-color: #009A63;
     padding: 10px;
@@ -38,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .search-form-input {
-border-radius: 5px;
+    border-radius: 5px;
     height: 26px;
     width: 300px;
 }
@@ -65,8 +64,26 @@ border-radius: 5px;
     right: 2%;
 }
 
+.account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    right: 2%;
+}
+
 .account a{
     margin-right: 10px;
+}
+
+.account-image img {
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+
+.account-image a:hover img {
+    transform: scale(1.25);
 }
 
 .account-actions a {
@@ -75,7 +92,7 @@ border-radius: 5px;
 }
 
 .account-actions a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .container {

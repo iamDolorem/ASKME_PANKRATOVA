@@ -193,14 +193,39 @@ h1, h2, h3, h4, h5, h6 {
     color: #4B0082; /* Цвет посещенных ссылок */
 }
 
-.pagination button {
+nav {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-item {
+    all: unset;
+    border: 1px solid black;
     border-radius: 5px;
     background-color: #004524;
+    padding: 5px;
+    color: white;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.page-link {
+    all: unset;
+    border-radius: 5px;
+    background-color: #004524;
+    padding: 5px;
     color: white;
     cursor: pointer;
 }
 
-.pagination button:hover {
+.page-link:hover {
     opacity: 80%;
 }
 

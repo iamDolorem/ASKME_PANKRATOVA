@@ -1,45 +1,52 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AskPupkin</title>
-    <link rel="stylesheet" href="./../static/css/index.css">
+    {% block css %}
+    {% endblock %}
 </head>
 
 <body>
     <header class="header">
         <div class="logo">
             <h3>
-                <a href="./index.html">
+                <a href="{% url 'index' %}">
                     AskPupkin
                 </a>
             </h3>
         </div>
 
         <div class="search-form">
-            <form action="./question.html">
+            <form action="{% url 'ask' %}">
                 <input class ="search-form-input" type="text" placeholder="Search">
                 <button class ="search-form-button">Ask!</button>
             </form>
         </div>
 
         <div class="account">
-            <!--Кнопки аккаунта-->
+            <div class="account-image">
+              <a href="{% url 'settings' %}">
+                <img src="../static/img/account.png" alt="AccountImage">
+              </a>
+            </div>
+            <div class="account-content">
+                <div class="account-name">Dr. Pepper</div>
+                <div class="account-actions">
+                    <a href="{% url 'settings' %}">Settings</a>
+                    <a href="#">Log out</a>
+                </div>
+            </div>
         </div>
     </header>
 
     <main class="container">
-        <div class="title-bar">
-            <!--Заголовок-->
-        </div>
-
         <div class="content">
-            <div class="cards">
-                <!--Контент страницы-->
-            </div>
-
+            {% block content %}
+            {% endblock %}
             <aside class="sidebar">
                 <section class="popular-tags">
                     <h3>Popular Tags</h3>

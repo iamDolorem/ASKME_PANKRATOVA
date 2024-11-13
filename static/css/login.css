@@ -68,6 +68,16 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 10px;
 }
 
+.account-image img {
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+
+.account-image a:hover img {
+    transform: scale(1.25);
+}
+
 .account-actions a {
     text-decoration: none;
     color: #004524;
