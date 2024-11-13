@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="cards">
+        <div class="title-bar">
+            <h1>One question page</h1>
+            <h4><a href="{% url 'index' %}">Main page</a></h4>
+        </div>
+
+        {% include 'layouts/question.html' with question=item %}
+
+        {% include 'layouts/pagination.html' %}
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% load static %}
+<article class="card">
+    <div class="card-left">
+        <img src="../static/img/account.png" alt="Image" class="card-image">
+        <input type="number" class="card-likes" value="5">
+    </div>
+
+    <div class="card-right">
+        <div class="card-right-content">
+            <h4 class="card-title"><a href="{% url 'one_question' question.id %}">{{ question.title }}</a></h4>
+
+            <div class="card-text">{{ question.text }}</div>
+        </div>
+
+        <div class="card-right-bottom">
+            <a href="./question.html">Answer (3)</a>
+
+            <div class="card-tags">
+                Tags:
+                <a href="#">black-jack</a>
+                <a href="./bender.html">bender</a>
+            </div>
+        </div>
+    </div>
+</article>
