@@ -7,21 +7,18 @@
 
 {% block content %}
     <div class="ask-cards">
-        <div class="title-bar">
-            <h1>One question page</h1>
-            <h4><a href="{% url 'index' %}">Main page</a></h4>
-        </div>
+        {% include 'layouts/question.html' %}
 
-        {% include 'layouts/maincard.html' %}
-
-        {% for question in questions %}
-            {% include 'layouts/card.html' %}
-        {% endfor %}
+        <h3>Answers ({{ question.answers_count }}):</h3>
+        {% if answers %}
+            {% for answer in answers %}
+                {% include "layouts/card.html" with answer=answer %}
+            {% endfor %}
+        {% else %}
+            <p>No answers yet. Be the first to answer!</p>
+        {% endif %}
 
         {% include 'layouts/youranswer.html' %}
-
-        {% include 'layouts/question.html' with question=item %}
-
         {% include 'layouts/pagination.html' %}
     </div>
 {% endblock %}

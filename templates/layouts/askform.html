@@ -1,12 +1,17 @@
 {% load static %}
-<form action="./question.html">
+<form action="./question.html" method="post">
     <div class="question">
         <div class="question-left">
             <h3>Title</h3>
         </div>
 
         <div class="question-right">
-                <input class ="question-right-input" type="text" placeholder="How to build a moon park?">
+            <input class="question-right-input" type="text" name="title" placeholder="How to build a moon park?">
+            {% if errors.title %}
+                <div class="error-message">
+                    {{ errors.title }}
+                </div>
+            {% endif %}
         </div>
     </div>
 
@@ -16,7 +21,12 @@
         </div>
 
         <div class="question-right">
-                <textarea class="comment" placeholder="Really, how? &#10Have no idea about it"></textarea>
+            <textarea class="comment" name="text" placeholder="Really, how? &#10Have no idea about it"></textarea>
+            {% if errors.text %}
+                <div class="error-message">
+                    {{ errors.text }}
+                </div>
+            {% endif %}
         </div>
     </div>
 
@@ -26,7 +36,12 @@
         </div>
 
         <div class="question-right">
-                <input class ="question-right-input" type="text" placeholder="moon, park, puzzle">
+            <input class="question-right-input" type="text" name="tags" placeholder="moon, park, puzzle">
+            {% if errors.tags %}
+                <div class="error-message">
+                    {{ errors.tags }}
+                </div>
+            {% endif %}
         </div>
     </div>
 
@@ -36,7 +51,7 @@
 
         <div class="question-right">
             <div class="question-search-form">
-                    <button class ="question-search-form-button">Ask!</button>
+                <button class="question-search-form-button" type="submit">Ask!</button>
             </div>
         </div>
     </div>

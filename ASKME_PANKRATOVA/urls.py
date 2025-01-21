@@ -26,4 +26,5 @@ urlpatterns = [
     path('settings/', views.setting, name='settings'),
     path('ask/', views.askform, name='ask'),
     path('admin/', admin.site.urls),
+    path('tag/<str:tag_name>', views.tag_questions, name='tag'),
 ]

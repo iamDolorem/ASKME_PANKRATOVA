@@ -2,20 +2,22 @@
 <article class="card">
     <div class="card-left">
         <img src="../static/img/account.png" alt="Image" class="card-image">
-        <input type="number" class="card-likes" value="5">
+        <input type="number" class="card-likes" value="{{ question.likes_count }}" readonly>
     </div>
 
     <div class="card-right">
         <div class="card-right-content">
-            <div class="card-text">First of all I would like to thank you for the </br>
-            invitation to participate in such a ... Russia is the </br>
-            huge territory which in many respects needs to</br>
-            be render habitable.</div>
+            <p>{{ answer.text }}</p>
         </div>
 
         <div class="check">
-            <input type="checkbox" id="scales" name="scales" checked/>
-            <label for="scales">Correct!</label>
+            <input class="form-check-input" type="checkbox" value="" id="correct{{ answer.id }}"
+            {% if answer.is_correct %}
+                   checked
+               {% endif %}>
+                <label class="form-check-label" for="correct{{ answer.id }}">
+                    Correct!
+                </label>
         </div>
     </div>
 </article>

@@ -21,8 +21,12 @@
         </div>
 
         <div class="search-form">
-            <form action="{% url 'ask' %}">
+            <form action="{% url 'hot' %}">
                 <input class ="search-form-input" type="text" placeholder="Search">
+                <button class ="search-form-button">Search</button>
+            </form>
+
+            <form action="{% url 'ask' %}">
                 <button class ="search-form-button">Ask!</button>
             </form>
         </div>

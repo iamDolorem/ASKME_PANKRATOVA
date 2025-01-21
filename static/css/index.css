@@ -28,12 +28,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .logo a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
-.search-form{
-    position: absolute;
-    left: 35%;
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-form form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .search-form-input {
@@ -84,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .account-actions a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .container {
@@ -105,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .title-bar a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .content {
@@ -167,7 +178,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-title a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .card-right-bottom {
@@ -181,7 +192,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-right-bottom a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .card-tags a {
@@ -190,7 +201,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-tags a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 nav {
@@ -247,7 +258,7 @@ nav {
 }
 
 .tags a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .best-members-list {
@@ -268,5 +279,5 @@ nav {
 }
 
 .best-members-list a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
