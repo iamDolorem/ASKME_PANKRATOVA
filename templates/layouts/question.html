@@ -1,24 +1,26 @@
 {% load static %}
 <article class="card">
     <div class="card-left">
-        <img src="../static/img/account.png" alt="Image" class="card-image">
+        <img src="{{ question.author.profile.avatar.url }}" alt="User Avatar" class="card-image">
         <input type="number" class="card-likes" value="{{ question.likes_count }}" readonly>
     </div>
 
     <div class="card-right">
         <div class="card-right-content">
-            <h4 class="card-title"><a href="{% url 'one_question' question.id %}">{{ question.title }}</a></h4>
-
+            <h4 class="card-title">
+                <a href="{% url 'app:one_question' question_id=question.id %}" class="text-decoration-underline text-primary">
+                    {{ question.title }}
+                </a>
+            </h4>
             <div class="card-text">{{ question.text }}</div>
         </div>
 
         <div class="card-right-bottom">
-            <a href="{% url 'one_question' question.id %}">Answer ({{ question.answers_count }})</a>
-
+            <a href="{% url 'app:one_question' question_id=question.id %}">Answer ({{ question.answers_count }})</a>
             <div class="card-tags">
                 Tags:
                 {% for tag in question.tags.all %}
-                    <a href="{% url 'tag' tag_name=tag %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                    <a href="{% url 'app:tag' tag_name=tag %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
             </div>
         </div>

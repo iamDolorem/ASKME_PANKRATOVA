@@ -28,12 +28,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .logo a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
-.search-form{
-    position: absolute;
-    left: 35%;
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-form form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .search-form-input {
@@ -84,7 +95,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .account-actions a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .container {
@@ -203,7 +214,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tags a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .best-members-list {
@@ -224,5 +235,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .best-members-list a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
+}
+
+.avatar-preview {
+    max-width: 150px;
+    max-height: 150px;
+    width: auto;
+    height: auto;
 }

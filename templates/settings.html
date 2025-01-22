@@ -1,16 +1,43 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 
+{% block title %}Settings{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/settings.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class = "settings">
+    <div class="settings">
         <div class="title-bar">
-            <h1>Settings: Dr.Pepper</h1>
+            <h1>Settings:</h1>
         </div>
 
-        {% include 'layouts/setting.html' %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="form-text text-danger">
+                            {{ field.errors.0 }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="login">
+                <label>Current avatar:</label><br>
+                {% if user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" class="avatar-preview" alt="Current avatar"
+                         onerror="this.src='{% static 'img/account.png' %}';">
+                {% else %}
+                    <img src="{% static 'img/account.png' %}" class="avatar-preview" alt="Default avatar">
+                {% endif %}
+            </div>
+
+            <button type="submit" class="login-right-button">Save</button>
+        </form>
     </div>
 {% endblock %}

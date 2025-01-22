@@ -1,6 +1,8 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 
+{% block title %}New Question{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/ask.css' %}">
 {% endblock %}
@@ -8,9 +10,23 @@
 {% block content %}
     <div class = "all-question">
         <div class="title-bar">
-            <h1>New Question</h1>
+            <h2>New Question</h2>
         </div>
-
-        {% include 'layouts/askform.html' %}
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="question">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="form-text text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Ask!</button>
+        </form>
     </div>
 {% endblock %}

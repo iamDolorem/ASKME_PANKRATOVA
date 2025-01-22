@@ -31,9 +31,20 @@ h1, h2, h3, h4, h5, h6 {
     color: #4B0082; /* Цвет посещенных ссылок */
 }
 
-.search-form{
-    position: absolute;
-    left: 35%;
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-form form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .search-form-input {
@@ -106,21 +117,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .all-login {
     display: flex;
-    width: 70%;
+    width: 100%;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     padding-top: 20px;
-}
-
-.error h4{
-    color:red;
-    margin-bottom: 10px;
 }
 
 .login {
     padding: 5px;
     display: flex;
     gap: 10px;
+    padding-top: 10px;
+    flex-direction: column;
 }
 
 .login-left {
@@ -166,19 +174,21 @@ h1, h2, h3, h4, h5, h6 {
 .login-place a {
     text-decoration: none;
     margin-top: 5px;
-    font-size: 25px;
+    font-size: 20px;
     color: #004524;
 }
 
 .login-place a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
+
 
 .sidebar {
     display: flex;
     flex-direction: column;
     gap: 30px;
     width: 30%;
+    margin-left: auto;
 }
 
 .popular-tags h3 {
@@ -192,7 +202,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tags a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }
 
 .best-members-list {
@@ -213,5 +223,5 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .best-members-list a:visited {
-    color: #4B0082; /* Цвет посещенных ссылок */
+    color: #4B0082;
 }

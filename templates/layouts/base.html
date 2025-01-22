@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AskPupkin</title>
+    <title>{% block title %}AskPupkin{% endblock %}</title>
     {% block css %}
     {% endblock %}
 </head>
@@ -14,36 +14,45 @@
     <header class="header">
         <div class="logo">
             <h3>
-                <a href="{% url 'index' %}">
+                <a href="{% url 'app:index' %}">
                     AskPupkin
                 </a>
             </h3>
         </div>
 
         <div class="search-form">
-            <form action="{% url 'hot' %}">
+            <form action="{% url 'app:index' %}">
                 <input class ="search-form-input" type="text" placeholder="Search">
                 <button class ="search-form-button">Search</button>
             </form>
 
-            <form action="{% url 'ask' %}">
+            <form action="{% url 'app:ask' %}">
                 <button class ="search-form-button">Ask!</button>
             </form>
         </div>
 
         <div class="account">
-            <div class="account-image">
-              <a href="{% url 'settings' %}">
-                <img src="../static/img/account.png" alt="AccountImage">
-              </a>
-            </div>
-            <div class="account-content">
-                <div class="account-name">Dr. Pepper</div>
-                <div class="account-actions">
-                    <a href="{% url 'settings' %}">Settings</a>
-                    <a href="#">Log out</a>
+            {% if user.is_authenticated %}
+                {% if user.profile.avatar %}
+                    <div class="account-image">
+                          <a href="{% url 'app:settings' %}">
+                                <img src="{{ user.profile.avatar.url }}" alt="AccountImage" class="user-avatar" />
+                          </a>
+                    </div>
+                {% endif %}
+                <div class="account-content">
+                    <div class="account-name">{{ user.username }}</div>
+                    <div class="account-actions">
+                        <a href="{% url 'app:settings' %}">Settings</a>
+                        <a href="{% url 'app:logout' %}?next={{ request.path }}">Log out</a>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+                <div class="account-content">
+                    <a href="{% url 'app:login' %}">Log in</a>
+                    <a href="{% url 'app:signup' %}">Registration</a>
+                </div>
+            {% endif %}
         </div>
     </header>
 

@@ -1,154 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layouts/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AskPupkin</title>
-    <link rel="stylesheet" href="./../static/css/register.css">
-</head>
+{% block title %}AskPupkin Registration{% endblock %}
 
-<body>
-    <header class="header">
-        <div class="logo">
-            <h3>
-                <a href="./index.html">
-                    AskPupkin
-                </a>
-            </h3>
-        </div>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
 
-        <div class="search-form">
-            <form action="./question.html">
-                <input class ="search-form-input" type="text" placeholder="Search">
-                <button class ="search-form-button">Ask!</button>
-            </form>
-        </div>
-
-       <div class="account">
-            <div class="account-content">
-                <div class="account-actions">
-                    <a href="./login.html">Log in</a>
-                    <a href="./register.html">Register</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="container">
+{% block content %}
+    <div class = "left">
         <div class="title-bar">
             <h1>Registration</h1>
         </div>
-
-        <div class="content">
-            <div class="registration">
-                <form action="./index.html">
+        <div class="registration">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
                     <div class="error">
-                          <h4>Sorry, this email address already registered!</h4>
-                      </div>
-
-                    <div class="register">
-                        <div class="register-left">
-                            <h3>Login</h3>
-                        </div>
-
-                        <div class="register-right">
-                                <input class ="register-right-input" type="text" placeholder="dr_pepper">
-                        </div>
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="form-text text-danger">
+                                {{ field.errors.0 }}
+                            </div>
+                        {% endif %}
                     </div>
-
-                    <div class="register">
-                        <div class="register-left">
-                            <h3>Email</h3>
-                        </div>
-
-                        <div class="register-right">
-                                <input class ="register-right-input" type="text" placeholder="dr.pepper@mail.ru">
-                        </div>
-                    </div>
-
-                    <div class="register">
-                        <div class="register-left">
-                            <h3>NickName</h3>
-                        </div>
-
-                        <div class="register-right">
-                                <input class ="register-right-input" type="text" placeholder="Dr.Pepper">
-                        </div>
-                    </div>
-
-                    <div class="register">
-                        <div class="register-left">
-                            <h3>Password</h3>
-                        </div>
-
-                        <div class="register-right">
-                                <input class ="register-right-input" type="text" placeholder="********">
-                        </div>
-                    </div>
-
-                    <div class="register">
-                        <div class="register-left">
-                            <h3>Repeat password</h3>
-                        </div>
-
-                        <div class="register-right">
-                            <input class ="register-right-input" type="text" placeholder="********">
-                        </div>
-                    </div>
-
-                    <div class="register">
-                        <div class="register-left">
-                            <h3>Upload avatar</h3>
-                        </div>
-
-                        <div class="place-avatar">
-                            <form action="./question.html">
-                                <input type="file">
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="register">
-                        <div class="register-left">
-                        </div>
-
-                        <div class="register-place">
-                            <form action="./question.html">
-                                <button class ="register-right-button">Register!</button>
-                            </form>
-                        </div>
-                      </div>
+                {% endfor %}
+                <div cladd="details">
+                <form action="./question.html">
+                    <button type="submit" class ="register-right-button">Register!</button>
                 </form>
-            </div>
-
-            <aside class="sidebar">
-                <section class="popular-tags">
-                    <h3>Popular Tags</h3>
-                    <div class="tags">
-                        <a href="#">perl</a>
-                        <a href="#" style="color: #FF0000">python</a>
-                        <a href="#">TechnoPark</a>
-                        <a href="#" style="color: #FF0000">MySQL</a>
-                        <a href="#" style="color: #32CD32">django</a>
-                        <a href="#">Mail.Ru</a>
-                        <a href="#">Voloshin</a>
-                        <a href="#" style="color: #FFA500">Firefox</a>
-                    </div>
-                </section>
-
-                <section class="best-members">
-                    <h3>Best Members</h3>
-                    <ul class="best-members-list">
-                        <li><a href="#"> Mr. Freeman</a></li>
-                        <li><a href="#"> Dr. House</a></li>
-                        <li><a href="#"> Bender</a></li>
-                        <li><a href="#"> Queen Victoria</a></li>
-                        <li><a href="#"> V. Pupkin</a></li>
-                    </ul>
-                </section>
-            </aside>
+                </div>
+            </form>
         </div>
-    </main>
-</body>
-</html>
+    </div>
+{% endblock %}

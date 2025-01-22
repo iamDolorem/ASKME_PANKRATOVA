@@ -1,24 +1,35 @@
 {% extends 'layouts/base.html' %}
+
 {% load static %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/question.css' %}">
 {% endblock %}
 
+{% block title %}One Question{% endblock %}
+
+
 {% block content %}
     <div class="ask-cards">
-        {% include 'layouts/question.html' %}
+        {% include "layouts/question.html" %}
 
         <h3>Answers ({{ question.answers_count }}):</h3>
-        {% if answers %}
-            {% for answer in answers %}
+        {% for answer in answers %}
+            <div id="answer-{{ answer.id }}" class="answer">
                 {% include "layouts/card.html" with answer=answer %}
-            {% endfor %}
-        {% else %}
+            </div>
+        {% empty %}
             <p>No answers yet. Be the first to answer!</p>
+        {% endfor %}
+
+        {% if user.is_authenticated %}
+            {% include "layouts/youranswer.html" with form=form question=question %}
+        {% else %}
+            <p>
+                <a href="{% url 'app:login' %}">Войдите</a>, чтобы оставить ответ.
+            </p>
         {% endif %}
 
-        {% include 'layouts/youranswer.html' %}
-        {% include 'layouts/pagination.html' %}
+        {% include "layouts/pagination.html" %}
     </div>
 {% endblock %}

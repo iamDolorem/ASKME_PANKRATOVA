@@ -1,10 +1,19 @@
 {% load static %}
-<form action="./question.html">
-    <div class="your-answer">
-        <textarea class="comment" placeholder="Enter your answer here.."></textarea>
-    </div>
+<div class="your-answer">
+    <form method="post" action="{% url 'app:add_answer' question.id %}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
 
-    <div class="answer-button">
-        <button class ="answer-form-button">Answer</button>
-    </div>
-</form>
+        {% for field in form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+                {% for error in field.errors %}
+                    <div class="text-danger small">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="answer-form-button">Answer</button>
+    </form>
+</div>

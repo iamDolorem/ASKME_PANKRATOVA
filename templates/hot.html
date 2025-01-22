@@ -1,6 +1,8 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 
+{% block title %}Hot Questions{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
@@ -9,7 +11,7 @@
     <div class="cards">
         <div class="title-bar">
             <h1>Hot Questions</h1>
-            <h4><a href="{% url 'index' %}">New Questions</a></h4>
+            <h4><a href="{% url 'app:index' %}">New Questions</a></h4>
         </div>
 
         {% for question in questions %}
