@@ -2,7 +2,7 @@
 <article class="card">
     <div class="card-left">
         <img src="{{ question.author.profile.avatar.url }}" alt="User Avatar" class="card-image">
-        <input type="number" class="card-likes" value="{{ question.likes_count }}" readonly>
+        <span class="like-count">{{ question.likes_count }}</span> Likes
     </div>
 
     <div class="card-right">
@@ -16,6 +16,14 @@
         </div>
 
         <div class="card-right-bottom">
+            <div class="like-buttons">
+                <button class="like-button" data-question-id="{{ question.id }}" data-action="like" {% if user in question.liked_by.all %}disabled{% endif %}>
+                    +
+                </button>
+                <button class="dislike-button" data-question-id="{{ question.id }}" data-action="dislike" {% if user not in question.liked_by.all %}disabled{% endif %}>
+                    -
+                </button>
+            </div>
             <a href="{% url 'app:one_question' question_id=question.id %}">Answer ({{ question.answers_count }})</a>
             <div class="card-tags">
                 Tags:
@@ -26,3 +34,67 @@
         </div>
     </div>
 </article>
+
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Like button click handler
+        $('.like-button').click(function() {
+            var button = $(this);
+            var questionId = button.data('question-id');
+            var action = button.data('action');
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+            // Send AJAX request to like the question
+            $.ajax({
+                url: '{% url "app:like_question" %}',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': csrfToken,
+                    'question_id': questionId,
+                    'action': action
+                },
+                success: function(response) {
+                    // Update like count and disable buttons
+                    button.siblings('.dislike-button').prop('disabled', false);
+                    button.prop('disabled', true);
+                    button.siblings('.like-count').text(response.new_like_count);
+                },
+                error: function(response) {
+                    alert('Error: ' + response.responseJSON.error);
+                }
+            });
+        });
+
+        // Dislike button click handler
+        $('.dislike-button').click(function() {
+            var button = $(this);
+            var questionId = button.data('question-id');
+            var action = button.data('action');
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+            // Send AJAX request to dislike the question
+            $.ajax({
+                url: '{% url "app:like_question" %}',
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': csrfToken,
+                    'question_id': questionId,
+                    'action': action
+                },
+                success: function(response) {
+                    // Update like count and disable buttons
+                    button.siblings('.like-button').prop('disabled', false);
+                    button.prop('disabled', true);
+                    button.siblings('.like-count').text(response.new_like_count);
+                },
+                error: function(response) {
+                    alert('Error: ' + response.responseJSON.error);
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

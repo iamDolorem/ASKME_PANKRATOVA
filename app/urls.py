@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.template.context_processors import static
 from django.urls import path
+from django.conf.urls.static import static
 
 from app import views
 
@@ -20,4 +21,11 @@ urlpatterns = [
     path('ask/', views.ask_question, name='ask'),
     path('admin/', admin.site.urls),
     path('tag/<str:tag_name>', views.tag_questions, name='tag'),
+    path('like/', views.like_question, name='like_question'),
+    path('like-answer/', views.like_answer, name='like_answer'),
+    path('mark-answer-correct/', views.mark_answer_correct, name='mark_answer_correct'),
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

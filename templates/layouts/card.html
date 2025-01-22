@@ -11,13 +11,97 @@
         </div>
 
         <div class="check">
-            <input class="form-check-input" type="checkbox" value="" id="correct{{ answer.id }}"
-            {% if answer.is_correct %}
-               checked
-            {% endif %}>
-                <label class="form-check-label" for="correct{{ answer.id }}">
-                    Correct!
-                </label>
+            <input class="form-check-input" type="checkbox" value="" id="correct{{ answer.id }}" {% if answer.is_correct %}checked{% endif %} data-answer-id="{{ answer.id }}">
+            <label class="form-check-label" for="correct{{ answer.id }}">
+                Correct!
+            </label>
+        </div>
+
+        <div class="like-buttons">
+            <button class="like-button" data-answer-id="{{ answer.id }}" {% if user in answer.liked_by.all %}disabled{% endif %}>+</button>
+            <button class="dislike-button" data-answer-id="{{ answer.id }}" {% if user not in answer.liked_by.all %}disabled{% endif %}>-</button>
         </div>
     </div>
 </article>
+
+<script>
+    $(document).ready(function() {
+        // Обработчик для кнопки лайка
+        $('.like-button').click(function() {
+            var button = $(this);
+            var answerId = button.data('answer-id');
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+            $.ajax({
+                url: '{% url "app:like_answer" %}',  // Убедитесь, что URL правильный
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': csrfToken,
+                    'answer_id': answerId,
+                    'action': 'like'
+                },
+                success: function(response) {
+                    if (response.new_like_count !== undefined) {
+                        button.prop('disabled', true);  // Отключаем кнопку лайка
+                        button.siblings('.dislike-button').prop('disabled', false);  // Включаем кнопку дизлайка
+                        button.siblings('.card-likes').val(response.new_like_count);  // Обновляем количество лайков
+                    }
+                },
+                error: function(response) {
+                    alert('Error: ' + response.responseJSON.error);
+                }
+            });
+        });
+
+        // Обработчик для кнопки дизлайка
+        $('.dislike-button').click(function() {
+            var button = $(this);
+            var answerId = button.data('answer-id');
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+            $.ajax({
+                url: '{% url "app:like_answer" %}',  // Убедитесь, что URL правильный
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': csrfToken,
+                    'answer_id': answerId,
+                    'action': 'dislike'
+                },
+                success: function(response) {
+                    if (response.new_like_count !== undefined) {
+                        button.prop('disabled', true);  // Отключаем кнопку дизлайка
+                        button.siblings('.like-button').prop('disabled', false);  // Включаем кнопку лайка
+                        button.siblings('.card-likes').val(response.new_like_count);  // Обновляем количество лайков
+                    }
+                },
+                error: function(response) {
+                    alert('Error: ' + response.responseJSON.error);
+                }
+            });
+        });
+
+        // Обработчик для изменения статуса "Correct!"
+        $('#correct{{ answer.id }}').change(function() {
+            var checkbox = $(this);
+            var answerId = checkbox.data('answer-id');
+            var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+
+            $.ajax({
+                url: '{% url "app:mark_answer_correct" %}',  // Убедитесь, что URL правильный
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': csrfToken,
+                    'answer_id': answerId
+                },
+                success: function(response) {
+                    if (response.is_correct !== undefined) {
+                        checkbox.prop('checked', response.is_correct);
+                    }
+                },
+                error: function(response) {
+                    alert('Error: ' + response.responseJSON.error);
+                }
+            });
+        });
+    });
+</script>

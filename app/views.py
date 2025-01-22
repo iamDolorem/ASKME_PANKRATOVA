@@ -3,10 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Count
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
 from app.forms import AnswerForm, LoginForm, SignUpForm, ProfileEditForm, QuestionForm
-from app.models import Question, Answer, Tag
+from app.models import Question, Answer, Tag, QuestionLike
 from app.pagination import paginate_queryset
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -176,3 +179,71 @@ def tag_questions(request, tag_name):
         'questions': page.object_list,
         'page_obj': page
     })
+
+
+@csrf_exempt
+@login_required
+def like_question(request):
+    if request.method == 'POST':
+        question_id = request.POST.get('question_id')
+        action = request.POST.get('action')
+
+        try:
+            question = Question.objects.get(id=question_id)
+        except Question.DoesNotExist:
+            return JsonResponse({'error': 'Question not found'}, status=404)
+
+        if action == 'like':
+            if not request.user in question.liked_by.all():
+                question.liked_by.add(request.user)
+                question.save()
+            else:
+                return JsonResponse({'error': 'You already liked this question'}, status=400)
+        elif action == 'dislike':
+            if request.user in question.liked_by.all():
+                question.liked_by.remove(request.user)
+                question.save()
+            else:
+                return JsonResponse({'error': 'You have not liked this question'}, status=400)
+
+        return JsonResponse({'new_like_count': question.likes_count()})
+
+
+@csrf_exempt
+@login_required
+def like_answer(request):
+    if request.method == 'POST':
+        answer_id = request.POST.get('answer_id')
+        action = request.POST.get('action')
+
+        try:
+            answer = Answer.objects.get(id=answer_id)
+        except Answer.DoesNotExist:
+            return JsonResponse({'error': 'Answer not found'}, status=404)
+
+        if action == 'like':
+            if not request.user in answer.liked_by.all():
+                answer.liked_by.add(request.user)
+                answer.save()  # Сохраняем изменения
+            else:
+                return JsonResponse({'error': 'You already liked this answer'}, status=400)
+        elif action == 'dislike':
+            if request.user in answer.liked_by.all():
+                answer.liked_by.remove(request.user)
+                answer.save()
+            else:
+                return JsonResponse({'error': 'You have not liked this answer'}, status=400)
+
+        return JsonResponse({'new_like_count': answer.likes_count()})
+
+@login_required
+def mark_answer_correct(request, answer_id):
+    answer = get_object_or_404(Answer, id=answer_id)
+
+    if answer.question.author.user != request.user:
+        return JsonResponse({'error': 'You are not the author of this question'}, status=403)
+
+    answer.is_correct = not answer.is_correct
+    answer.save()
+
+    return JsonResponse({'is_correct': answer.is_correct})
